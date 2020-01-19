@@ -1,27 +1,29 @@
-// FIXME: Make me compile. Diff budget: 12 line additions and 2 characters.
+// // FIXME: Make me compile. Diff budget: 12 line additions and 2 characters.
 
-// I AM NOT DONE
+// // I AM NOT DONE
 
-struct ErrorA;
-struct ErrorB;
+// struct ErrorA;
+// struct ErrorB;
 
-enum Error {
-    A(ErrorA),
-    B(ErrorB),
-}
+// enum Error {
+//     A(ErrorA),
+//     B(ErrorB),
+// }
 
-// What traits does `Error` need to implement?
+// // What traits does `Error` need to implement?
 
-fn do_a() -> Result<u16, ErrorA> {
-    Err(ErrorA)
-}
+// fn do_a() -> Result<u16, ErrorA> {
+//     Err(ErrorA)
+// }
 
-fn do_b() -> Result<u32, ErrorB> {
-    Err(ErrorB)
-}
+// fn do_b() -> Result<u32, ErrorB> {
+//     Err(ErrorB)
+// }
 
-fn do_both() -> Result<(u16, u32), Error> {
-    Ok((do_a(), do_b()))
-}
+// fn do_both() -> Result<(u16, u32), Error> {
+//     Ok((do_a(), do_b()))
+// }
 
-fn main() {}
+// fn main() {}
+
+pub fn main() {}

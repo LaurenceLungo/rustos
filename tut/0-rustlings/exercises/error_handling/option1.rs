@@ -4,7 +4,6 @@
 // on `None`. Handle this in a more graceful way than calling `unwrap`!
 // Execute `rustlings hint option1` for hints :)
 
-// I AM NOT DONE
 
 pub fn pop_too_much() -> bool {
     let mut list = vec![3];
@@ -12,7 +11,13 @@ pub fn pop_too_much() -> bool {
     let last = list.pop().unwrap();
     println!("The last item in the list is {:?}", last);
 
-    let second_to_last = list.pop().unwrap();
+    let mut second_to_last = list.pop();
+
+    match second_to_last {
+        Some(thing) => second_to_last = Some(thing),
+        None => second_to_last = Some(0),
+    }
+
     println!(
         "The second-to-last item in the list is {:?}",
         second_to_last

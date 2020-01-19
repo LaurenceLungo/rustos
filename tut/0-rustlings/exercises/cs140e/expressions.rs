@@ -8,7 +8,9 @@
 struct IntWrapper(isize);
 
 // Implement a generic function here
-// fn max...
+fn max<U,T>(a: U, b: T) {
+    
+}
 
 #[test]
 fn expressions() {
