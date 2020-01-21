@@ -1,20 +1,18 @@
-// // FIXME: Make me compile! Diff budget: 1 line.
+// FIXME: Make me compile! Diff budget: 1 line.
 
-// // I AM NOT DONE
 
-// struct StrWrapper<'a>(&'a str);
 
-// impl<'a> StrWrapper<'a> {
-//     fn inner(&self) -> &str {
-//         self.0
-//     }
-// }
+struct StrWrapper<'a>(&'a str);
 
-// // Do not modify this function.
-// pub fn main() {
-//     let string = "Hello!";
-//     let wrapper = StrWrapper(&string);
-//     let _: &'static str = wrapper.inner();
-// }
+impl<'a> StrWrapper<'a> {
+    fn inner(&self) -> &'a str {
+        self.0
+    }
+}
 
-pub fn main() {}
+// Do not modify this function.
+pub fn main() {
+    let string = "Hello!";
+    let wrapper = StrWrapper(&string);
+    let _: &'static str = wrapper.inner();
+}
