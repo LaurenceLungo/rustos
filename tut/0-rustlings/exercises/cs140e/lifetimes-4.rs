@@ -13,4 +13,8 @@ impl<'a, 'b, T> RefWrapperWrapper<'a, 'b, T> {
     }
 }
 
+<<<<<<< HEAD
 pub fn main() {}
+=======
+pub fn main() { }
+>>>>>>> skeleton/lab2

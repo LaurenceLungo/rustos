@@ -2,8 +2,7 @@
 
 
 
-// What traits does this struct need to derive?
-#[derive(Debug, PartialEq)]
+#[derive(Debug)]
 struct MyType(usize);
 
 fn borrow2() {

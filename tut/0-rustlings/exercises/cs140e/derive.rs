@@ -7,7 +7,7 @@
 enum Duration {
     MilliSeconds(u64),
     Seconds(u32),
-    Minutes(u16),
+    Minutes(u16)
 }
 
 pub fn main() {

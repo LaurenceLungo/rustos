@@ -6,7 +6,7 @@ struct ErrorB;
 
 enum Error {
     A(ErrorA),
-    B(ErrorB),
+    B(ErrorB)
 }
 
 // What traits does `Error` need to implement?
@@ -34,4 +34,8 @@ fn do_both() -> Result<(u16, u32), Error> {
     Ok((do_a()?, do_b()?))
 }
 
+<<<<<<< HEAD
 fn main() {}
+=======
+fn main() { }
+>>>>>>> skeleton/lab2

@@ -7,4 +7,4 @@ struct RefWrapper<'a, T>(&'a T);
 // Do not modify the inner type &'b RefWrapper<'a, T>.
 struct RefWrapperWrapper<'b, 'a, T>(&'b RefWrapper<'a, T>);
 
-pub fn main() {}
+pub fn main() { }
