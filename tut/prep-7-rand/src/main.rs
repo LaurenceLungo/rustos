@@ -34,7 +34,7 @@ fn spin_sleep_ms(ms: usize) {
 struct RdRand;
 impl RngCore for RdRand {
     fn next_u32(&mut self) -> u32 {
-        self.next_u64() as u32
+        unsafe { RNG_DATA.read_volatile() as u32 }
     }
 
     fn next_u64(&mut self) -> u64 {
