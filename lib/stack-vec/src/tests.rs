@@ -2,6 +2,22 @@ use crate::StackVec;
 
 #[test]
 fn assignment_text_example() {
+
+    // --------------------------------------------------{
+
+    let mut storage2 = [0i64; 1024];
+    let mut vec2 = StackVec::new(&mut storage2);
+
+    for i in 0..1 {
+        vec2.push(i).expect("me: can push 1024 times");
+    }
+
+    for (i, v) in vec2.iter().enumerate() {
+        assert_eq!(*v as i64, i as i64);
+    }
+
+    // --------------------------------------------------}
+
     let mut storage = [0u8; 1024];
     let mut vec = StackVec::new(&mut storage);
 
@@ -15,6 +31,17 @@ fn assignment_text_example() {
 
     let last_element = vec.pop().expect("has elements");
     assert_eq!(last_element, 9 * 9);
+
+    // --------------------------------------------------{
+
+    for _i in 0..vec.len() {
+        vec.pop().expect("has elements");
+    }
+    let non_existent_element = vec.pop();
+    assert_eq!(non_existent_element, Option::None);
+
+    // --------------------------------------------------}
+
 }
 
 #[test]
