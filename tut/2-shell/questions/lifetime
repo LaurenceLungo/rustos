@@ -1,0 +1,16 @@
+Why is the 'a bound on T required? (lifetime)
+
+struct StackVec<'a, T> { buffer: &'a mut [T], len: usize }
+Rust automatically enforces the bound T: 'a and will complain if 
+type T lives shorter than the lifetime 'a. For instance, if T is 
+&'b str and 'b is strictly shorter than 'a, Rust won’t allow you 
+to create the instance of StackVec<'a, &'b str>.
+
+Why is the bound required? What could go wrong if the bound wasn’t 
+enforced by Rust?
+
+--------------------------------------------------------------------
+
+If the lifetime of T is shorter than 'a, the T type data will go out of 
+scope before its reference is returned form StackVec, so a dangling 
+reference will be created if the bound wasn’t enforced by Rust.

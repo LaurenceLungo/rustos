@@ -1,0 +1,11 @@
+Why does StackVec require T: Clone to pop()? (clone-for-pop)
+
+The pop method from Vec<T> in the standard libary is implemented 
+for all T, but the pop method from our StackVec is only implemented 
+when T implements the Clone trait. Why might that be? What goes 
+wrong when the bound is removed?
+
+--------------------------------------------------------------------
+
+If not cloned, the data to be popped will try to move out of self.storage, 
+but it can't becuase it is behind a mutable reference.

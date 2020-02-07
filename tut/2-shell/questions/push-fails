@@ -1,0 +1,14 @@
+Why does push return a Result? (push-fails)
+
+The push method from Vec in the standard libary has 
+no return value, but the push method from our StackVec 
+does: it returns a Result indicating that it can fail. 
+Why can StackVec::push() fail where Vec::push() does not?
+
+-----------------------------------------------------------
+
+Because StackVec is allocated in stack with a finite size, 
+not like a Vec which has growable size. At some point when
+the length of the StackVec reaches its allocated size limit,
+No more data can be pushed, so fail may occur. On the other
+hand, Vec has no size limit so it never fails pushing.

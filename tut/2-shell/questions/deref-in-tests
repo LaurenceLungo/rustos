@@ -1,0 +1,20 @@
+Which tests make use of the Deref implementations? (deref-in-tests)
+
+Read through the tests we have provided in src/tests.rs. Which tests 
+would fail to compile if the Deref implementation did not exist? What 
+about the DerefMut implementation? Why?
+
+--------------------------------------------------------------------
+
+If Deref not implemented: 
+
+assignment_text_example(), iterator() would fail to compile becasue the .iter() 
+method, which is automatically implemented when Deref is implemented, is missing for StackVec.
+
+index_oob(), index_oob_after_truncate(), indexing(), mut_indexing() would fail 
+to compile becasue rust cannot immutably dereference stack_vec and index into stack_vec[_].
+
+If DerefMut not implemented: 
+
+mut_indexing() would fail to compile becasue rust cannot mutably dereference stack_vec and 
+assign value to stack_vec[_].

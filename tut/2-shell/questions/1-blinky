@@ -1,0 +1,12 @@
+How do you set other GPIO pins? (1-blinky)
+
+In assignment 1-blinky, you enabled GPIO pin 16 as an output 
+and then repeatedly set and cleared it by writing to registers 
+GPFSEL1, GPSET0, and GPCLR0. Which three registers would you 
+write to to do the same for GPIO pin 27? Which physical pin on 
+the Raspberry Pi maps to GPIO pin 27?
+
+-----------------------------------------------------------
+
+Accoridng to the BCM2837 ARM Peripherals Manual, GPFSEL2, GPSET0, and GPCLR0
+shoudl be used. GPIO 27 maps to pin 13 on the pi.
