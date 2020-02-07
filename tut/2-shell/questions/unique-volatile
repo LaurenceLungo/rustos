@@ -1,0 +1,13 @@
+Why does Unique<Volatile> exist? (unique-volatile)
+
+Both Volatile and Unique<Volatile> allow read/write volatile 
+accesses to an underlying pointer. According to the documentation, 
+what is the difference between these two types?
+
+---------------------------------------------------------------------
+
+Unique<Volatile> indicates that the possessor of this wrapper owns the 
+referent while Volatile does not. The referent of Unique<Volatile> pointer
+can only be modified wiht a unique path to the Unique reference while 
+Unique doesn't have this limit. Unique<Volatile> also implements Sync
+if its wrapper type implements Sync, allowing access from multiple threads.

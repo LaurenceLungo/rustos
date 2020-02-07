@@ -1,0 +1,11 @@
+What do the macros do? (macros)
+
+What do the readable!, writeable!, and readable_writeable! macros do?
+
+---------------------------------------------------------------------
+
+readable! implements Readable trait for a given type.
+
+writeable! implements Writeable trait for a given type.
+
+readable_writeable! implements ReadableWriteable trait for a given type.
