@@ -1,6 +1,7 @@
 use super::*;
 use std::sync::mpsc::{Receiver, Sender, channel};
 use std::io::Cursor;
+// use std;
 
 struct Pipe(Sender<u8>, Receiver<u8>, Vec<u8>);
 
@@ -76,20 +77,48 @@ fn read_byte() {
 
 #[test]
 fn test_expect_byte() {
-    let mut xmodem = Xmodem::new(Cursor::new(vec![1, 1]));
+    let mut xmodem = Xmodem::new(Cursor::new(vec![1, 2, CAN]));
     assert_eq!(xmodem.expect_byte(1, "1").expect("expected"), 1);
-    let e = xmodem.expect_byte(2, "1, please").expect_err("expect the unexpected");
-    assert_eq!(e.kind(), io::ErrorKind::InvalidData);
+    assert_eq!(xmodem.expect_byte(2, "2").expect("expected"), 2);
+    let e = xmodem.expect_byte(1, "1, please").expect_err("expect CAN");
+    assert_eq!(e.kind(), io::ErrorKind::ConnectionAborted);
+    let e1 = xmodem.expect_byte(1, "1, please").expect_err("expect error reading io");
+    assert_eq!(e1.kind(), io::ErrorKind::UnexpectedEof);
 }
 
 #[test]
 fn test_expect_byte_or_cancel() {
-    let mut buffer = vec![2, 0];
-    let b = Xmodem::new(Cursor::new(buffer.as_mut_slice()))
-        .expect_byte_or_cancel(2, "it's a 2")
-        .expect("got a 2");
+    let mut buffer = vec![2, 0, CAN];
+    let mut b = Xmodem::new(Cursor::new(buffer.as_mut_slice()));
+    let b2 = b.expect_byte_or_cancel(2, "it's a 2").expect("got a 2");
+    let b0 = b.expect_byte_or_cancel(0, "it's a 0").expect("got a 0");
 
-    assert_eq!(b, 2);
+    assert_eq!(b2, 2);
+    assert_eq!(b0, 0);
+}
+
+#[test]
+#[should_panic(expected = "received CAN")]
+fn test_expect_byte_or_cancel_receiving_CAN() {
+    let mut buffer = vec![CAN,1];
+    let mut b = Xmodem::new(Cursor::new(buffer.as_mut_slice()));
+    let bCAN = b.expect_byte_or_cancel(8, "it's a 8").expect("got a 8");
+}
+
+#[test]
+#[should_panic(expected = "got a 1")]
+fn test_expect_byte_or_cancel_receiving_invalid_byte() {
+    let mut buffer = vec![0];
+    let mut b = Xmodem::new(Cursor::new(buffer.as_mut_slice()));
+    let bCAN = b.expect_byte_or_cancel(1, "it's a 1").expect("got a 1");
+}
+
+#[test]
+#[should_panic(expected = "got a 1")]
+fn test_expect_byte_or_cancel_error_reading_io() {
+    let mut buffer = vec![];
+    let mut b = Xmodem::new(Cursor::new(buffer.as_mut_slice()));
+    let bCAN = b.expect_byte_or_cancel(1, "it's a 1").expect("got a 1");
 }
 
 #[test]
