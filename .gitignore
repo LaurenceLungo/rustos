@@ -1,3 +1,6 @@
 target/
 build/
 TAGS
+lib/xmodem/Cargo.lock
+lib/stack-vec/Cargo.lock
+kern/Cargo.lock
