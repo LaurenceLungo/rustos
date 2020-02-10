@@ -4,3 +4,5 @@ TAGS
 lib/xmodem/Cargo.lock
 lib/stack-vec/Cargo.lock
 kern/Cargo.lock
+lib/volatile/Cargo.lock
+lib/ttywrite/Cargo.lock
