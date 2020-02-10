@@ -1,0 +1,9 @@
+Which transitions did you follow in your lab 1 blinky? (blinky-states)
+
+When you implementing the blinky code in phase 4 of lab 1, you implicitly 
+implemented a subset of this state machine. Which transitions did your 
+code implement?
+
+-----------------------------------------------------------------------------
+
+start -> output <-> set <-> clear.
