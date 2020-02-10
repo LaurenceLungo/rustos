@@ -1,0 +1,10 @@
+What happens when a flag’s input is invalid? (invalid)
+
+Try passing in some invalid values for flags. For instance, it should not be possible to set -f to idk. 
+How does structopt know to reject invalid values?
+
+------------------------------------------------------------------------------------------------------------
+
+structops uses clap to parse arguments. Once clap parses the user provided string of arguments, it returns 
+the matches along with any applicable values. If the user made an error or typo, clap informs them with a 
+friendly message and exits gracefully.
