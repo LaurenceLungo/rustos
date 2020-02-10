@@ -1,0 +1,9 @@
+Why can’t you write to CLO or CHI? (restricted-reads)
+
+The BCM2837 documentation states that the CLO and CHI registers are read-only. 
+Our code enforces this property. How? What prevents us from writing to CLO or CHI?
+
+-----------------------------------------------------------------------------------
+
+CLO and CHI here are defined as type ReadVolatile, our implementation of ReadVolatile
+makes it impossible to write he underlying pointer, as discussed in (enforcing) question.
