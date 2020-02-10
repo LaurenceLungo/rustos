@@ -32,17 +32,19 @@ impl Timer {
     /// Reads the system timer's counter and returns Duration.
     /// `CLO` and `CHI` together can represent the number of elapsed microseconds.
     pub fn read(&self) -> Duration {
-        unimplemented!()
+        let current_time: u64 = (self.registers.CHI.read() as u64) << 32 | self.registers.CLO.read() as u64;
+        Duration::from_millis(current_time / 1000)
     }
 }
 
 /// Returns current time.
 pub fn current_time() -> Duration {
-    unimplemented!()
+    let timer  = Timer::new();
+    timer.read()
 }
 
 /// Spins until `t` duration have passed.
 pub fn spin_sleep(t: Duration) {
-    unimplemented!()
+    let times_up = t.checked_add(current_time()).expect("Duration addition failed");
+    while current_time().as_millis() < times_up.as_millis() {}
 }
-
