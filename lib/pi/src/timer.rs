@@ -46,5 +46,5 @@ pub fn current_time() -> Duration {
 /// Spins until `t` duration have passed.
 pub fn spin_sleep(t: Duration) {
     let times_up = t.checked_add(current_time()).expect("Duration addition failed");
-    while current_time().as_millis() < times_up.as_millis() {}
+    while current_time() < times_up {}
 }
