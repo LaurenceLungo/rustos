@@ -35,7 +35,7 @@ unsafe fn kmain() -> ! {
     // let mut uart = MiniUart::new();
 
     // FIXME: STEP 2: Continuously set and clear GPIO 16.
-    loop {
+    // loop {
         // led.set();
         // timer::spin_sleep(Duration::from_millis(100));
         // led.clear();
@@ -51,6 +51,6 @@ unsafe fn kmain() -> ! {
         // kprint!("Hello");
         // kprintln!("World! ");
         // timer::spin_sleep(Duration::from_secs(1))
-        shell(">");
-    }
+    // }
+    shell(">");
 }

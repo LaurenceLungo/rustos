@@ -46,8 +46,8 @@ impl<'a> Command<'a> {
 /// Starts a shell using `prefix` as the prefix for each line. This function
 /// returns if the `exit` command is called.
 pub fn shell(prefix: &str) -> ! {
-    const char_limit: usize = 12;
-    const args_limit: usize = 4;
+    const char_limit: usize = 512;
+    const args_limit: usize = 64;
     loop { // keep repeating line
         let mut bufRead: [u8; char_limit] = [0; char_limit];
         let mut bufLine: [u8; char_limit] = [0; char_limit];
