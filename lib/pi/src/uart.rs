@@ -172,10 +172,15 @@ mod uart_io {
             }
             match self.wait_for_byte() {
                 Ok(_) => {
-                    for i in 0..buf.len() {
+                    let mut i = 0;
+                    while i < buf.len() {
+                        if !self.has_byte() {
+                            break;
+                        }
                         buf[i] = self.read_byte();
+                        i += 1;
                     }
-                    return Ok(buf.len());
+                    return Ok(i);
                 },
                 Err(_) => {
                     return ioerr!(TimedOut,"MiniUart read TimedOut");
