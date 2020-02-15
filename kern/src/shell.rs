@@ -43,8 +43,7 @@ impl<'a> Command<'a> {
     }
 }
 
-/// Starts a shell using `prefix` as the prefix for each line. This function
-/// returns if the `exit` command is called.
+/// Starts a shell using `prefix` as the prefix for each line.
 pub fn shell(prefix: &str) -> ! {
     const char_limit: usize = 512;
     const args_limit: usize = 64;
