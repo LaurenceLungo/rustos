@@ -1,0 +1,11 @@
+Where does the write_fmt call go? (write-fmt)
+
+The _print helper function calls write_fmt on an instance of 
+MutexGuard<Console>, the return value from Mutex<Console>::lock(). 
+Which type will have its write_fmt method called, and where does 
+the method implementation come from?
+
+--------------------------------------------------------------------
+
+Console type will have its write_fmt method called, and the method 
+implementation comes from the implementation of fmt::Write for Console.

@@ -1,0 +1,12 @@
+How does your shell tie the many pieces together? (shell-lookback)
+
+Your shell makes use of much of the code you’ve written. Briefly 
+explain: which pieces does it makes use of and in what way?
+
+--------------------------------------------------------------------
+
+The shell initate a singleton CONSOLE from Console,
+then the Console listen to key events and display characters through uart driver,
+uart communicates with Serial hardware through gpio driver.
+
+The Console store the arguments extracted from the command to a StackVec.

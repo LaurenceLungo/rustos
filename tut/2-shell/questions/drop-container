@@ -1,0 +1,10 @@
+Why should we never return an &mut T directly? (drop-container)
+
+You’ll notice that every example we’ve provided wraps the mutable reference 
+in a container and then implements Drop for that container. What would go 
+wrong if we returned an &mut T directly instead?
+
+----------------------------------------------------------------------------
+
+The reference count would not be tracked, so we cannot use reference count to 
+ensure only one mutable reference is returned at a time.
