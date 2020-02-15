@@ -20,10 +20,11 @@ use console::kprint;
 // FIXME: You need to add dependencies here to
 // test your drivers (Phase 2). Add them as needed.
 use core::time::Duration;
+use core::fmt::Write;
 use pi::timer;
 use pi::gpio::{Gpio, Function};
 use pi::uart::MiniUart;
-use core::fmt::Write;
+use shell::shell;
 
 unsafe fn kmain() -> ! {
     // FIXME: STEP 1: Set GPIO Pin 16 as output.
@@ -47,8 +48,9 @@ unsafe fn kmain() -> ! {
         // timer::spin_sleep(Duration::from_millis(100));
         // let b = uart.read_byte();
         // uart.write_byte(b);
-        kprint!("Hello");
-        kprintln!("World! ");
-        timer::spin_sleep(Duration::from_secs(1))
+        // kprint!("Hello");
+        // kprintln!("World! ");
+        // timer::spin_sleep(Duration::from_secs(1))
+        shell(">");
     }
 }
