@@ -1,8 +1,18 @@
+use shim::io;
+use shim::path::{Path, PathBuf};
+
 use stack_vec::StackVec;
+
+use pi::atags::Atags;
+
+use fat32::traits::FileSystem;
+use fat32::traits::{Dir, Entry};
 
 use crate::console::{kprint, kprintln, CONSOLE};
 use shim::io::Read;
 use core::str;
+use crate::ALLOCATOR;
+use crate::FILESYSTEM;
 
 /// Error type for `Command` parse failures.
 #[derive(Debug)]
@@ -43,7 +53,12 @@ impl<'a> Command<'a> {
     }
 }
 
+<<<<<<< HEAD
 /// Starts a shell using `prefix` as the prefix for each line.
+=======
+/// Starts a shell using `prefix` as the prefix for each line. This function
+/// never returns.
+>>>>>>> skeleton/lab3
 pub fn shell(prefix: &str) -> ! {
     const char_limit: usize = 512;
     const args_limit: usize = 64;

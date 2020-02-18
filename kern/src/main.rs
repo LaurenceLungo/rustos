@@ -4,53 +4,37 @@
 #![feature(asm)]
 #![feature(global_asm)]
 #![feature(optin_builtin_traits)]
+#![feature(raw_vec_internals)]
 #![cfg_attr(not(test), no_std)]
 #![cfg_attr(not(test), no_main)]
 
 #[cfg(not(test))]
 mod init;
 
+extern crate alloc;
+
+pub mod allocator;
 pub mod console;
+pub mod fs;
 pub mod mutex;
 pub mod shell;
 
 use console::kprintln;
 use console::kprint;
 
-// FIXME: You need to add dependencies here to
-// test your drivers (Phase 2). Add them as needed.
-use core::time::Duration;
-use core::fmt::Write;
-use pi::timer;
-use pi::gpio::{Gpio, Function};
-use pi::uart::MiniUart;
-use shell::shell;
+use allocator::Allocator;
+use fs::FileSystem;
 
-unsafe fn kmain() -> ! {
-    // FIXME: STEP 1: Set GPIO Pin 16 as output.
-    
-    // let mut led = Gpio::new(16).into_output();
-    // let mut led2 = Gpio::new(20).into_output();
-    // let mut led3 = Gpio::new(21).into_output();
-    // let mut uart = MiniUart::new();
+#[cfg_attr(not(test), global_allocator)]
+pub static ALLOCATOR: Allocator = Allocator::uninitialized();
+pub static FILESYSTEM: FileSystem = FileSystem::uninitialized();
 
-    // FIXME: STEP 2: Continuously set and clear GPIO 16.
-    // loop {
-        // led.set();
-        // timer::spin_sleep(Duration::from_millis(100));
-        // led.clear();
-        // timer::spin_sleep(Duration::from_millis(100));
-        // led2.set();
-        // led3.set();
-        // timer::spin_sleep(Duration::from_millis(100));
-        // led2.clear();
-        // led3.clear();
-        // timer::spin_sleep(Duration::from_millis(100));
-        // let b = uart.read_byte();
-        // uart.write_byte(b);
-        // kprint!("Hello");
-        // kprintln!("World! ");
-        // timer::spin_sleep(Duration::from_secs(1))
-    // }
-    shell(">");
+fn kmain() -> ! {
+    unsafe {
+        ALLOCATOR.initialize();
+        FILESYSTEM.initialize();
+    }
+
+    kprintln!("Welcome to cs3210!");
+    shell::shell("> ");
 }
