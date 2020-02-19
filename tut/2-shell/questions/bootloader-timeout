@@ -1,0 +1,9 @@
+Why is the timeout necessary? (bootloader-timeout)
+
+Without the bootloader timing out and retrying a reception, it is possible for 
+the transmitter to stall indefinitely under some conditions. What are those conditions, 
+and why would the transmitter stall indefinitely?
+
+-----------------------------------------------------------------------------------------
+
+<><>
