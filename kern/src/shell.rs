@@ -53,12 +53,8 @@ impl<'a> Command<'a> {
     }
 }
 
-<<<<<<< HEAD
-/// Starts a shell using `prefix` as the prefix for each line.
-=======
 /// Starts a shell using `prefix` as the prefix for each line. This function
 /// never returns.
->>>>>>> skeleton/lab3
 pub fn shell(prefix: &str) -> ! {
     const char_limit: usize = 512;
     const args_limit: usize = 64;
