@@ -1,0 +1,11 @@
+What does the CMDLINE ATAG contain? (atag-cmdline)
+
+What is the value of the command line string in the CMDLINE ATAG found on your 
+Raspberry Pi? What do you think the parameters control?
+
+-------------------------------------------------------------------------------
+
+commandline value = 'bcm2708_fb.fbwidth=656 bcm2708_fb.fbheight=416'
+I guess bcm2708_fb.fbwidth controls the width of the frame buffer of the bcm2708 while
+bcm2708_fb.fbheight controls the frame buffer height. Combined they define the 
+resolution of the video display.

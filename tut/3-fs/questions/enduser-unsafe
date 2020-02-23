@@ -1,0 +1,14 @@
+Why is it a bad idea to expose unions to end-users? (enduser-unsafe)
+
+We’re going through a lot of effort to expose a safe interface to unsafe 
+data structures. You’ll see this over and over again in Rust, with the standard 
+library as a prime example. What benefit is there to exposing safe interfaces 
+to unsafe structures or operations in Rust? Could we yield the same benefits 
+in a language like C?
+
+-----------------------------------------------------------------------------------
+
+If unions are exposed to users, they may wrongly transmute the data which causes 
+undefined behaviours and memory unsafety. It is necessary to wrap them with safe 
+interfaces to ensure safety. C doesn't have this benefit because C doesn't restrict
+unsafe codes at all.
