@@ -1,5 +1,6 @@
 use core::alloc::Layout;
 use core::ptr;
+use std;
 
 use crate::allocator::util::*;
 use crate::allocator::LocalAlloc;
@@ -16,7 +17,10 @@ impl Allocator {
     /// starting at address `start` and ending at address `end`.
     #[allow(dead_code)]
     pub fn new(start: usize, end: usize) -> Allocator {
-        unimplemented!("bump allocator")
+        return Allocator {
+            current: start,
+            end
+        }
     }
 }
 
@@ -43,7 +47,27 @@ impl LocalAlloc for Allocator {
     /// or `layout` does not meet this allocator's
     /// size or alignment constraints.
     unsafe fn alloc(&mut self, layout: Layout) -> *mut u8 {
-        unimplemented!("bump allocator")
+        if layout.size() <= 0 {
+            return ptr::null_mut::<u8>();
+        }
+
+        let old_aligned_current = align_up(self.current, layout.align());
+        if old_aligned_current > self.end {
+            return ptr::null_mut::<u8>();
+        } 
+
+        let proposed_allocation = old_aligned_current.saturating_add(layout.size());
+        if proposed_allocation - old_aligned_current < layout.size() {
+            return ptr::null_mut::<u8>();
+        }
+
+        if proposed_allocation < self.end {
+            self.current = proposed_allocation;
+        } else {
+            return ptr::null_mut::<u8>();
+        }
+        
+        return old_aligned_current as *mut u8;
     }
 
     /// Deallocates the memory referenced by `ptr`.
