@@ -8,8 +8,10 @@
 pub fn align_down(addr: usize, align: usize) -> usize {
     let mut align_value = align;
     loop {
-        if align_value < 2 {
-            panic!("`align` is not a power of 2.");
+        if align == 1 {
+            break;
+        } else if align_value < 2 {
+            panic!("align_down: align value {} is not a power of 2.", align);
         }
         else if align_value == 2 {
             break;
@@ -34,8 +36,10 @@ pub fn align_down(addr: usize, align: usize) -> usize {
 pub fn align_up(addr: usize, align: usize) -> usize {
     let mut align_value = align;
     loop {
-        if align_value < 2 {
-            panic!("`align` is not a power of 2.");
+        if align == 1 {
+            break;
+        } else if align_value < 2 {
+            panic!("align_up: align value {} is not a power of 2.", align);
         }
         else if align_value == 2 {
             break;
