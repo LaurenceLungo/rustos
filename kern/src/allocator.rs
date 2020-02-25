@@ -78,7 +78,18 @@ pub fn memory_map() -> Option<(usize, usize)> {
     let page_size = 1 << 12;
     let binary_end = unsafe { (&__text_end as *const u8) as usize };
 
-    unimplemented!("memory map")
+    let mut atags = Atags::get();
+    loop {
+        match atags.next() {
+            Some(atag) => {
+                match atag {
+                    Atag::Mem(mem) => return Some((util::align_up(binary_end, page_size), util::align_down((mem.size as usize), page_size))),
+                    _ => {},
+                }
+            }
+            None => return None,
+        }
+    }
 }
 
 impl fmt::Debug for Allocator {
